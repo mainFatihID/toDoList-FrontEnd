@@ -1,13 +1,54 @@
 import 'package:flutter/material.dart';
+import '../service/api.dart';
+import 'main_page.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool loading = false;
+
+  Future<void> login() async {
+  setState(() => loading = true);
+
+  try {
+    final res = await ApiService.post('/auth/login', {
+      'email': emailController.text.trim(),
+      'password': passwordController.text,
+    });
+
+    await ApiService.saveToken(res['data']['token']);
+    
+    if (!mounted) return;
+    
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MainPage(),
+      ),
+    );
+  } catch (e) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          e.toString().replaceFirst('Exception: ', ''),
+        ),
+      ),
+    );
+  } finally {
+    if (mounted) {
+      setState(() => loading = false);
+    }
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,6 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 0,),
               TextFormField(
+                controller: emailController,
                 decoration: InputDecoration(
                   hintText: 'name@example.com',
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -79,6 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 8,),
               TextFormField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: 'min. 8 characters',
@@ -95,9 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/menu');
-                  },
+                  onPressed: login,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFA3E635),
                     foregroundColor: Colors.black,
