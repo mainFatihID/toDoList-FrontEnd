@@ -311,49 +311,29 @@ class InboxTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 1. Header (Avatar FR & Tombol Notifikasi/More) 👤🔔
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const CircleAvatar(
-                radius: 18,
-                backgroundColor: Color(0xFFF3F4F6),
-                child: Text(
-                  'FR',
-                  style: TextStyle(color: Colors.grey, fontSize: 12),
+          // Header (Avatar & Icons) 👤🔔
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const CircleAvatar(
+                  radius: 18,
+                  backgroundColor: Color(0xFFF3F4F6),
+                  child: Text('FR', style: TextStyle(color: Colors.black, fontSize: 12)),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFF9FAFB),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Row(
+                Row(
                   children: [
-                    Stack(
-                      children: [
-                        const Icon(Icons.notifications_none, size: 20, color: Colors.black),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          child: Container(
-                            width: 6,
-                            height: 6,
-                            decoration: const BoxDecoration(
-                              color: Colors.red,
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                      ],
+                    IconButton(
+                      icon: const Icon(Icons.notifications_none),
+                      onPressed: () {},
                     ),
-                    const SizedBox(width: 8),
-                    const Icon(Icons.more_horiz, size: 20, color: Colors.black),
+                    IconButton(
+                      icon: const Icon(Icons.more_horiz),
+                      onPressed: () {},
+                    ),
                   ],
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
           const SizedBox(height: 24),
 
           // 2. Kartu Notifikasi Login Baru 🔔
@@ -595,7 +575,7 @@ void _showAddTaskModal(BuildContext context) {
                 ),
                 const SizedBox(height: 16,),
 
-                // 1. Form Input
+                // 1. Form Input nama kerjaan
                 TextField(
                   controller: taskController,
                   decoration: InputDecoration(
@@ -610,7 +590,22 @@ void _showAddTaskModal(BuildContext context) {
                 ),
                 const SizedBox(height: 16,),
 
-                // 2. Tombol milih tanggal
+                // 2. Form Input deskripsi kerjaan
+                TextField(
+                  controller: taskController,
+                  decoration: InputDecoration(
+                    hintText: 'Task Description',
+                    filled: true,
+                    fillColor: const Color(0xFFF3F4F6),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16,),
+
+                // 3. Tombol milih tanggal
                 OutlinedButton.icon(
                   onPressed: () async {
                     final DateTime? pickedDate = await showDatePicker(
@@ -638,7 +633,7 @@ void _showAddTaskModal(BuildContext context) {
                 ),
                 const SizedBox(height: 20,),
 
-                // 3. Tombol simpen
+                // 4. Tombol simpen
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
