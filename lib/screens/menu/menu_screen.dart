@@ -351,10 +351,10 @@ class InboxTab extends StatelessWidget {
                 ),
               ],
             ),
-            child: Row(
+            child: const Row(
               children: [
                 // Ikon Lonceng dalam Lingkaran Cokelat
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 20,
                   backgroundColor: Color(0xFF9E8B67),
                   child: Icon(
@@ -363,10 +363,10 @@ class InboxTab extends StatelessWidget {
                     size: 20,
                   ),
                 ),
-                const SizedBox(width: 12),
+                SizedBox(width: 12),
 
                 // Teks Judul dan Deskripsi (Menggunakan Column)
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
