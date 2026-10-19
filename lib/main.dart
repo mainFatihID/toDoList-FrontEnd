@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Todo App',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(colorSchemeSeed: Colors.indigo,),
-      home: AuthGate(),
+      // home: AuthGate(),
       initialRoute: '/',
       routes: {
         '/': (context) => const WelcomeScreen(),
