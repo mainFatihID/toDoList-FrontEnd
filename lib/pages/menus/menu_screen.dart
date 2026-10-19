@@ -148,6 +148,7 @@ class TodayTab extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // bagian atas
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -311,29 +312,49 @@ class InboxTab extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // 1. Header (Avatar FR & Tombol Notifikasi/More) 👤🔔
-          // Header (Avatar & Icons) 👤🔔
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const CircleAvatar(
-                  radius: 18,
-                  backgroundColor: Color(0xFFF3F4F6),
-                  child: Text('FR', style: TextStyle(color: Colors.black, fontSize: 12)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const CircleAvatar(
+                radius: 18,
+                backgroundColor: Color(0xFFF3F4F6),
+                child: Text(
+                  'FR',
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
-                Row(
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF9FAFB),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.notifications_none),
-                      onPressed: () {},
+                    Stack(
+                      children: [
+                        const Icon(Icons.notifications_none, size: 20, color: Colors.black),
+                        Positioned(
+                          right: 0,
+                          top: 0,
+                          child: Container(
+                            width: 6,
+                            height: 6,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.more_horiz),
-                      onPressed: () {},
-                    ),
+                    const SizedBox(width: 8),
+                    const Icon(Icons.more_horiz, size: 20, color: Colors.black),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
+          ),
           const SizedBox(height: 24),
 
           // 2. Kartu Notifikasi Login Baru 🔔
@@ -575,7 +596,7 @@ void _showAddTaskModal(BuildContext context) {
                 ),
                 const SizedBox(height: 16,),
 
-                // 1. Form Input nama kerjaan
+                // 1. Form Input
                 TextField(
                   controller: taskController,
                   decoration: InputDecoration(
