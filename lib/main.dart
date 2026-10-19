@@ -5,7 +5,6 @@ import 'package:flutter_playground/pages/login_page.dart';
 import 'package:flutter_playground/pages/main_page.dart';
 import 'package:flutter_playground/pages/profile_page.dart';
 import 'package:flutter_playground/pages/register_page.dart';
-import 'package:flutter_playground/pages/menus/menu_screen.dart';
 import 'package:flutter_playground/pages/today_page.dart';
 import 'package:flutter_playground/service/api.dart';
 import 'pages/welcome_page.dart';
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => const WelcomeScreen(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
-        '/menu':(context) => const MenuScreen(),
         '/home': (context) => const HomePage(),
         '/today':(context) => const TodayPage(),
         '/inbox':(context) => const InboxPage(),
